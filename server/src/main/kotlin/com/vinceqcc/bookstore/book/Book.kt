@@ -1,10 +1,8 @@
 package com.vinceqcc.bookstore.book
 
 import jakarta.persistence.*
-import lombok.AllArgsConstructor
-import lombok.Builder
-import lombok.NoArgsConstructor
-
+import org.springframework.data.repository.CrudRepository
+import java.time.LocalDate
 
 @Table(name = "books")
 @Entity
@@ -12,19 +10,26 @@ data class Book(
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(updatable = false, unique = true, nullable = false)
-    var id: String?,
+    var id: String? = null,
 
-    @Column(unique = false)
-    var title: String = "",
-) {
-    constructor() : this(id = "", title = "")
+    @Column(nullable = false)
+    val title: String? = null,
 
-    class Builder {
-        private var id: String = "";
-        private var title: String = "";
+    @Column(nullable = false)
+    val author: String? = null,
 
-        fun id(id: String) = apply { this.id = id }
-        fun title(title: String) = apply { this.title = title }
-        fun build() = Book(id, title)
-    }
-}
+    @Column(nullable = false)
+    val price: Double? = null,
+
+    @Column(nullable = false)
+    val stockQuantity: Int? = 0,
+
+    @Column(nullable = false)
+    val publishedDate: LocalDate? = null,
+
+    val description: String? = null,
+    val imageUrl: String? = null,
+    val genre: String? = null,
+)
+
+interface BookRepository : CrudRepository<Book, String> {}
