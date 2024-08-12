@@ -12,12 +12,22 @@ data class Book(
     @Column(updatable = false, unique = true, nullable = false)
     var id: String? = null,
 
-    val title: String,
-    val author: String,
-    val description: String? = null,
-    val price: Double,
+    @Column(nullable = false)
+    val title: String? = null,
+
+    @Column(nullable = false)
+    val author: String? = null,
+
+    @Column(nullable = false)
+    val price: Double? = null,
+
+    @Column(nullable = false)
     val stockQuantity: Int? = 0,
-    val publishedDate: LocalDate,
+
+    @Column(nullable = false)
+    val publishedDate: LocalDate? = null,
+
+    val description: String? = null,
     val imageUrl: String? = null,
     val genre: String? = null,
 )
